@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block contant %}
+<div class="row fullfill">
+  {% for object in object_list %}
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 p-4">
+      <a href="{% url 'plants:plants_detail' slug=object.plant.slug pk=object.pk %}">
+        <div class="">
+          <img class="rounded mx-auto d-block m-2 shadow rounded-lg" style="width:100%;height:300px;object-fit: cover;" src="{{object.profile_pic.image.url}}" alt="">
+          <h3 class="font-weight-bold mt-2 mb-2 p-3 text-light groth_green shadow">{{object.plant.name}}</h3>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

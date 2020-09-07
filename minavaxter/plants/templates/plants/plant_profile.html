@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block contant %}
+<div class="">
+  <div class="p-4">
+    <div class="">
+      <div>
+        <a style="position: absolute;" class="text-secondary btn rounded-circle m-2" href="{% url 'plants:upload_pic' slug=object.plant.slug pk=object.pk %}"><span class="fas fa-images"></span></a>
+        <a href="{{object.profile_pic.image.url}}">
+          <img class="rounded mx-auto d-block shadow rounded-lg mb-2" style="width:100%;height:300px;object-fit: cover;" src="{{object.profile_pic.image.url}}" alt="">
+        </a>
+      </div>
+      <h3 class="font-weight-bold mb-2 groth_green text-light p-3 shadow">{{object.plant.name}}</h3>
+      <div class="fullfill w-100">
+        <table class="table bg-white rounded shadow">
+          <tbody>
+            <tr>
+              <td class="d-flex justify-content-between"><span class="fas fa-tree mr-2"></span></td>
+              <td><p>{{object.plant.species}}</p></td>
+            </tr>
+            <tr>
+              <td class="d-flex justify-content-between"><span class="fas fa-sun mr-2"></span></td>
+              <td><p><span class="{{object.plant.light_color}} font-weight-bold">{{object.plant.light}}:</span> {{object.plant.light_details}}</p></td>
+            </tr>
+            <tr>
+              <td class="d-flex justify-content-between"><span class="fas fa-tint mr-2"></span></td>
+              <td><p><span class="{{object.plant.water_color}} font-weight-bold">{{object.plant.water}}:</span> {{object.plant.water_details}}</p></td>
+            </tr>
+            <tr>
+              <td class="d-flex justify-content-between"><span class="fas fa-file-alt mr-2"></span></td>
+              <td><p class="">{{object.plant.info}}</p></td>
+            </tr>
+            <tr class="bg-light">
+              <td><a class="btn groth_green text-light" href="{{object.plant.link}}"><span class="fas fa-link"></span></a></td>
+              <td><a class="" href="{{object.plant.link}}">Find more info here!</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {% include 'plants/_groth_chart.html' %}
+
+      <div class="d-flex justify-content-between bg-light mt-3 p-3 w-100 shadow rounded-lg">
+        <div class="">
+          <p><strong>Last time watered</strong></p>
+          <p>{{object.watered}} <span>({{dt_water}} days)</span></p>
+        </div>
+        <a id="watered" style="font-size:40px;" class="btn groth_green_text" href="{% url 'plants:watered' slug=object.plant.slug pk=object.pk %}"><span class="fas fa-faucet"></span></a>
+      </div>
+
+      <div class="d-flex justify-content-between bg-light mt-3 p-3 w-100 shadow rounded-lg">
+        <div class="">
+          <p><strong>Last time fertilized</strong></p>
+          <p>{{object.fertilizer}} <span>({{dt_fertilizer}} days)</span></p>
+        </div>
+        <a id="fertilizer" style="font-size:40px;" class="btn groth_green_text" href="{% url 'plants:fertilizer' slug=object.plant.slug pk=object.pk %}"><span class="fas fa-poop"></span></a>
+      </div>
+
+      <div class="mt-4">
+        <a class="btn btn-danger w-100 p-3" href="{% url 'plants:plants_delete' slug=object.plant.slug pk=object.pk %}"><span class="fas fa-trash-alt mr-2"></span>Delete</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="row fullfill w-100">
+  {% for pic in gallery %}
+  <div class="col-lg-3 col-xs-4 m-2">
+    <a href="{{pic.image.url}}">
+      <a style="position: absolute;" class="text-secondary btn rounded-circle m-2" href="{% url 'plants:delete_pic' slug=object.plant.slug pk=pic.pk pk2=object.pk %}"><span class="fas fa-times"></span></a>
+      <a href="{{pic.image.url}}">
+        <img class="rounded mx-auto d-block shadow rounded-lg" style="width:100%;object-fit: cover;" src="{{pic.image.url}}" alt="MISSING IMAGE :(">
+      </a>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

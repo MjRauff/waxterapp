@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load bootstrap4 %}
+
+{% block contant %}
+<div class="jumbotron">
+  <form method="post">
+      {% csrf_token %}
+      <p>Are you sure you want to delete "{{ object.plant.name }}"?</p>
+      <a class="btn btn-primary text-white mr-2" href="{% url 'plants:plants_detail' slug=object.plant.slug pk=object.pk %}">Cancel</a>
+      <input class="btn btn-danger" type="submit" value="Delete">
+  </form>
+</div>
+{% endblock %}

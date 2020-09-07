@@ -1,0 +1,42 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Date', 'Groth'],
+      {% for groth in groth_rate %}
+      ['{{groth.date_create}}',  {{groth.length}}],
+      {% endfor %}
+    ]);
+
+    var options = {
+      title: 'Groth rate for {{object.name}}',
+      colors: ['#00911b',],
+      curveType: 'function',
+      // backgroundColor: { fill:'transparent' },
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+    chart.draw(data, options);
+  }
+</script>
+
+<div class="bg-white rounded shadow">
+  <form class="p-3" method="post">
+      {% csrf_token %}
+      <div class="d-flex justify-content-between">
+        <div class="">
+          <label class="text-dark" for="length">Length: </label>
+          <input id="length" type="text" name="length" value="">
+          <input class="btn groth_green text-light m-2" type="submit" value="OK">
+        </div>
+        <h6><strong>{{object.length}} cm</strong></h6>
+      </div>
+  </form>
+  {% if groth_rate_last.length is not 0 or None %}
+  <div class="" id="curve_chart" style="width: 100%;"></div>
+  {% endif %}
+</div>

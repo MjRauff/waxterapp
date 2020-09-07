@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block contant %}
+<div class="">
+  <div class="jumbotron">
+    <ul class="list-group list-group-flush">
+      <a class="w-100 btn btn-dark text-white mt-2 p-3" href="{% url 'plants:create_type' %}"><span class="fas fa-tree mr-2"></span>Add plant type</a>
+    {% for object in object_list %}
+      <form class="p-3 mt-2 w-100" method="post">
+        {% csrf_token %}
+        <a class="delete_btn" href="{% url 'plants:delete_type' slug=object.slug %}">delete</a>
+        <input class="w-100 btn btn-success text-white p-3" name="grab_type" type="submit" value="{{object.name}}">
+      </form>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

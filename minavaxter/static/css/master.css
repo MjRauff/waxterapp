@@ -1,0 +1,22 @@
+.fullfill{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.groth_green{
+  background-color: #2c7a46;
+}
+
+.groth_green_text{
+  color: #2c7a46;
+}
+
+.indextablet{
+  width:45vw;
+  height:45vw;
+}
+.delete_btn{
+  color:red;
+  text-align: right;
+  margin-bottom:-10px;
+}

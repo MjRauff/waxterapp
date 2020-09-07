@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load bootstrap4 %}
+
+{% block contant %}
+<div class="jumbotron">
+  <form method="post">
+      {% csrf_token %}
+      {% if object.name %}
+      <p>Are you sure you want to delete "{{ object.name }}"?</p>
+      {% elif test %}
+      <p>Are you sure you want to delete "{{ test }}"?</p>
+      {% endif %}
+      <a class="btn btn-primary text-white mr-2" href="{% url 'plants:plants_list_type' %}">Cancel</a>
+      <input class="btn btn-danger" type="submit" value="Delete">
+  </form>
+</div>
+{% endblock %}
